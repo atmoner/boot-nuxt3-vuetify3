@@ -1,0 +1,1 @@
+# boot-nuxt3-vuetify3
