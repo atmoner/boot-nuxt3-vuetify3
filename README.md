@@ -2,10 +2,10 @@
 
 Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
 
-Package added:
-1/ Vuetify
-2/ Material design icons
-3/ 
+Package added:  
+1/ Vuetify  
+2/ Material design icons  
+3/   
 
 ## Setup
 
