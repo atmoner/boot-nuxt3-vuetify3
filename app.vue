@@ -1,15 +1,5 @@
 <template>
   <v-app id="inspire">
-    <v-system-bar>
-      <v-spacer></v-spacer>
-
-      <v-icon>mdi-square</v-icon>
-
-      <v-icon>mdi-circle</v-icon>
-
-      <v-icon>mdi-triangle</v-icon>
-    </v-system-bar>
-
     <v-navigation-drawer v-model="drawer">
       <v-sheet
         color="grey-lighten-4"
@@ -20,8 +10,7 @@
           color="grey-darken-1"
           size="64"
         ></v-avatar>
-
-        <div>john@vuetifyjs.com</div>
+        <div>{{ name }}</div>
       </v-sheet>
 
       <v-divider></v-divider>
@@ -39,6 +28,7 @@
           <v-list-item-title>{{ text }}</v-list-item-title>
         </v-list-item>
       </v-list>
+       <p class="footerMenu py-12 pl-4" >Version: {{ version }}</p>
     </v-navigation-drawer>
 
     <v-main>
@@ -53,7 +43,7 @@
             cols="12"
           >
             <v-card>
-
+ 
               <v-list lines="two">
                 <v-list-subheader>{{ card }}</v-list-subheader>
                 <template v-for="n in 6" :key="n">
@@ -85,16 +75,48 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      cards: ['Today', 'Yesterday'],
-      drawer: null,
-      links: [
-        ['mdi-inbox-arrow-down', 'Inbox'],
-        ['mdi-send', 'Send'],
-        ['mdi-delete', 'Trash'],
-        ['mdi-alert-octagon', 'Spam'],
-      ],
-    }),
-  }
+import { storeToRefs } from 'pinia'
+import { useDataStore } from '~/store/data'
+export default defineComponent({
+  data: () => ({
+    cards: ['Today', 'Yesterday'],
+    drawer: null,
+    links: [
+      ['mdi-inbox-arrow-down', 'Inbox'],
+      ['mdi-send', 'Send'],
+      ['mdi-delete', 'Trash'],
+      ['mdi-alert-octagon', 'Spam'],
+    ],
+  }),
+  setup() {
+    const store = useDataStore()
+    const { name, version, doubleCount, count } = storeToRefs(store)
+
+    return {
+      name,
+      version,
+      doubleCount, 
+      count
+    }
+  },
+})
+ 
 </script>
+<style>
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.2s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(0.5rem);
+}
+
+.footerMenu {
+  position: absolute;
+  bottom: 0px;
+  width: 50%; 
+}
+
+</style>
